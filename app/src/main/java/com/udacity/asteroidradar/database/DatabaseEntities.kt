@@ -31,16 +31,3 @@ fun List<DatabaseAsteroid>.asDomainModel(): List<Asteroid> {
         )
     }
 }
-
-@Entity(tableName = "database_picture_of_day")
-data class DatabasePictureOfDay(
-        @PrimaryKey
-        val id: Long,
-        val mediaType: String,
-        val title: String,
-        val url: String
-)
-
-fun DatabasePictureOfDay.asDomainModel(): PictureOfDay {
-    return PictureOfDay(mediaType, title, url)
-}
