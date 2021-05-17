@@ -21,10 +21,12 @@ package com.udacity.asteroidradar.network
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.udacity.asteroidradar.BuildConfig
 import com.udacity.asteroidradar.Constants.API_KEY
 import com.udacity.asteroidradar.Constants.BASE_URL
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.TODAY_DATE
+import com.udacity.asteroidradar.api.getApiKey
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -37,15 +39,16 @@ import retrofit2.http.Query
  */
 
 interface AsteroidRadarService {
+
     @GET("neo/rest/v1/feed/")
     fun getAsteroids(
-        @Query("start_date") startDate: String = TODAY_DATE,
-        @Query("api_key") apiKey: String = API_KEY
+            @Query("start_date") startDate: String = TODAY_DATE,
+            @Query("api_key") apiKey: String = getApiKey()
     ): Call<String>
 
     @GET("planetary/apod/")
     suspend fun getPictureOfTheDay(
-        @Query("api_key") apiKey: String = API_KEY
+            @Query("api_key") apiKey: String = getApiKey()
     ): PictureOfDay
 }
 
